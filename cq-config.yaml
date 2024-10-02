@@ -1,0 +1,23 @@
+kind: source
+spec:
+  name: "state-deadlock"
+  registry: "local"
+  path: "./bin/cq-source-state-deadlock"
+  version: "v1.0.0"
+  tables: ["*"]
+  backend_options:
+    table_name: "deadlock_state"
+    connection: "@@plugins.postgresql.connection"
+  spec: {}
+  destinations:
+  - "postgresql"
+---
+kind: destination
+spec:
+  name: "postgresql"
+  path: "cloudquery/postgresql"
+  registry: "cloudquery"
+  version: "v8.6.1"
+  write_mode: "overwrite-delete-stale"
+  spec:
+    connection_string: "user=postgres password=postgres host=localhost port=5432 dbname=postgres"
